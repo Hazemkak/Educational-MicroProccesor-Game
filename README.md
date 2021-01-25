@@ -64,5 +64,5 @@ In case 2 players mode the red & yellow only will be available , in case 3 playe
 
 ### 📷 Screenshots:
 #
-<img src="Sreen\ Shots\Player_Win.png" alt="Website image">
-<img src="Sreen\ Shots\While_Playing.png" alt="Website image">
+<img src="screenshots\Player_Win.png" alt="Website image">
+<img src="screenshots\While_Playing.png" alt="Website image">
