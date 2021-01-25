@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ludo Game MicroProcessor</title>
+    <!--Font Awesome-->
+  <script src="https://kit.fontawesome.com/47629bb4fb.js" crossorigin="anonymous"></script>
+  <!--Bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  
+  <!--CSS-->
+    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+    <link rel="icon" href="iconWeb.jpg" />
+    <nav class="navbar navbar-light bg-dark">
+        <div class="container-fluid" >
+            <h4 style="color: floralwhite; margin:0 auto; font-weight: bold; font-family:Arial, Helvetica, sans-serif;">Registeredo</h4>
+        </div>
+      </nav>
+</head>
+
+<body>
+    <div class="row" style="padding-top:2%;">
+
+    <div class="container  col-lg-6 col-md-6 col-sm-12">
+        <div class="row" style="margin-top: 0;">
+            <input id="playerNumber" style="width: 18.5rem; font-size: small; float: right;" class="form-control me-2" type="number" min="2" max="4" placeholder="Enter The Number Of PLayers To Start Game" aria-label="Search">
+            <button style="width: 10rem;" class="btn btn-success" onclick="start()" id="startBtn">Start Game</button>
+        </div>
+        <hr>
+        <div class="row" style="margin-bottom: 10%; margin-top: 0;">
+            
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th id="AX" scope="col">AX &nbsp</th>
+                    <th id="BX" scope="col">BX &nbsp</th>
+                    <th id="CX" scope="col">CX &nbsp</th>
+                    <th id="DX" scope="col">DX &nbsp</th>
+                    <th id="MOV" scope="col">MOV &nbsp</th>
+                    <th id="XCHG" scope="col">XCHG &nbsp</th>
+                    <th id="Add" scope="col">Add &nbsp</th>
+                    <th id="Decimal" scope="col">Decimal &nbsp</th>
+                  </tr>
+                </thead>
+                <tbody class="red">
+                    <th  id="PAX4" scope="col">1</th>
+                    <th id="PAX5" scope="col">0</th>
+                    <th id="PAX6" scope="col">0</th>
+                    <th id="PAX7" scope="col">0</th>
+                    <th id="PAX0" scope="col">0</th>
+                    <th id="PAX1" scope="col">0</th>
+                    <th id="PAX2" scope="col">0</th>
+                    <th id="PAX3" scope="col">0</th>
+                </tbody>
+                <tbody class="yellow">
+                    <th id="PBX4" scope="col">0</th>
+                    <th id="PBX5" scope="col">1</th>
+                    <th id="PBX6" scope="col">0</th>
+                    <th id="PBX7" scope="col">0</th>
+                    <th id="PBX0" scope="col">0</th>
+                    <th id="PBX1" scope="col">0</th>
+                    <th id="PBX2" scope="col">0</th>
+                    <th id="PBX3" scope="col">0</th>
+                </tbody>
+                <tbody class="blue" >
+                    <th id="PCX4" scope="col">0</th>
+                    <th id="PCX5" scope="col">0</th>
+                    <th id="PCX6" scope="col">1</th>
+                    <th id="PCX7" scope="col">0</th>
+                    <th id="PCX0" scope="col">0</th>
+                    <th id="PCX1" scope="col">0</th>
+                    <th id="PCX2" scope="col">0</th>
+                    <th id="PCX3" scope="col">0</th>
+                </tbody>
+                <tbody class="green">
+                    <th id="PDX4" scope="col">0</th>
+                    <th id="PDX5" scope="col">0</th>
+                    <th id="PDX6" scope="col">0</th>
+                    <th id="PDX7" scope="col">1</th>
+                    <th id="PDX0" scope="col">0</th>
+                    <th id="PDX1" scope="col">0</th>
+                    <th id="PDX2" scope="col">0</th>
+                    <th id="PDX3" scope="col">0</th>
+                </tbody>
+              </table>
+              <div class="row" style="margin-top: 2%;">
+                    <button class="btn btn-success" onclick="Command()"  id="commandRequest" style="width: 40%; float: left;" disabled>Command</button>
+                    <button class="btn btn-danger" onclick="executeCommand()"  id="executeCommand" style="width: 40%; float: right;" disabled>Execute</button>
+            </div>
+        </div>
+        <div>
+            <hr>
+            <p>
+            <small ><i id="AXScore" class="fas fa-lock score circleRed"> AX=0</i><input type="hidden" name="" value="0" id="AXScore0"></small>&nbsp &nbsp
+            <small ><i id="BXScore" class="fas fa-lock score circleYellow"> BX=0</i><input type="hidden" name="" value="0" id="BXScore0"></small>&nbsp &nbsp
+            <small ><i id="CXScore" class="fas fa-lock score circleBlue"> CX=0</i><input type="hidden" name="" value="0" id="CXScore0"></small>&nbsp &nbsp
+            <small ><i id="DXScore" class="fas fa-lock score circleGreen"> DX=0</i><input type="hidden" name="" value="0" id="DXScore0"></small> 
+            </p>
+            <br>
+        </div>
+            <div class="alert alert-success" role="alert" id="questionSection" hidden>
+                <h5 class="alert-heading" id="questionHeader">Answer Question</h5>
+                <p id="questionContent" style="font-size: small;">ver you need to, be sure to use margin utilities to keep things nice and tidy??</p>
+                <hr>
+                <input style="margin-bottom: 5%;" type="text" class="form-control" name="" id="Answer">
+                <button style="float: right;" class="btn btn-success" onclick="checkPlayerAnswer()" id="ansBtn">Answer</button>
+              </div>
+        
+    </div>
+
+	<div class="container  col-lg-6 col-md-6 col-sm-12">
+
+        <div class="row" style="margin-top: 0;">
+            <div class="col-sm-6">
+                <button class="btn red btn-lg"  id="rollDice" onclick="rollDice(); " style="margin-right: 5%;" disabled>Roll Dice</button>
+                <img src="" alt="" id="diceImg"><br>
+                <small id="displayTurn" class="circleRed" style="font-weight: bold; float: left;">Red Turn 'AX'</small>
+            </div>
+        </div>
+	 	<!-- First Row -->
+	 	 <div class="container-row1 clearfix">
+            <div class="row1-col1 green">
+                <div class="row1-col1-child clearfix white" id="D">
+                    <div onclick="checkPlayerPress('DX0')" ><i id="HDX0" style="margin-top: 17%;" class="fas fa-microchip circleGreen fa-2x"></i></div>
+                    <div onclick="checkPlayerPress('DX1')" ><i id="HDX1" style="margin-top: 17%;" class="fas fa-hdd circleGreen fa-2x"></i></div>
+                    <div onclick="checkPlayerPress('DX2')" ><i id="HDX2" style="margin-top: 17%;" class="fas fa-database circleGreen fa-2x"></i></div>
+                    <div onclick="checkPlayerPress('DX3')" ><i id="HDX3" style="margin-top: 17%;" class="fas fa-ethernet circleGreen fa-2x"></i></div>
+                </div>
+            </div>
+            <div class="row1-col2 clearfix">
+                <div id="c1"></div>
+                <div id="c2"></div>
+                <div id="c3"></div>
+                <div id="c4"></div>
+                <div id="c5" class="yellow"></div>
+                <div id="c6" class="yellow"></div>
+                <div id="c7"></div>
+                <div id="c8" class="yellow"></div>
+                <div id="c9"></div>
+                <div id="c10"></div>
+                <div id="c11" class="yellow"></div>
+                <div id="c12"></div>
+                <div class="safe" id="c13"></div>
+                <div id="c14" class="yellow"></div>
+                <div class="safe" id="c15"></div>
+                <div class="question" id="c16"></div>
+                <div id="c17" class="yellow"></div>
+                <div class="safe" id="c18"></div>
+            </div>
+            <div class="row1-col3 yellow">
+                <div class="row1-col3-child clearfix white" id="B">
+                    <div onclick="checkPlayerPress('BX0')" ><i id="HBX0" style="margin-top: 17%;" class="fas fa-microchip circleYellow fa-2x"></i></div>
+                    <div onclick="checkPlayerPress('BX1')" ><i id="HBX1" style="margin-top: 17%;" class="fas fa-hdd circleYellow fa-2x"></i></div>
+                    <div onclick="checkPlayerPress('BX2')" ><i id="HBX2" style="margin-top: 17%;" class="fas fa-database circleYellow fa-2x"></i></div>
+                    <div onclick="checkPlayerPress('BX3')" ><i id="HBX3" style="margin-top: 17%;" class="fas fa-ethernet circleYellow fa-2x"></i></div>
+                </div>
+            </div>
+        </div>
+
+	 <!-- Second row -->
+        <div class="container-row2 clearfix">
+            <div class="row2-col1 clearfix">
+                <div id="c19"></div>
+                <div id="c20" class="green"></div>
+                <div id="c21"></div>
+                <div id="c22"></div>
+                <div class="safe" id="c23"></div>
+                <div class="safe" id="c24"></div>
+                <div id="c25"></div>
+                <div id="c26" class="green"></div>
+                <div id="c27" class="green"></div>
+                <div id="c28" class="green"></div>
+                <div id="c29" class="green"></div>
+                <div id="c30" class="green"></div>
+                <div id="c31"></div>
+                <div id="c32"></div>
+                <div id="c33"></div>
+                <div id="c34"></div>
+                <div class="safe" id="c35"></div>
+                <div class="question" id="c36"></div>
+            </div>
+            <div class="row2-col2">
+                <!-- add triangular effect using html and css -->
+                <div class="contain-triangles">
+                    <div class="triangle-right"></div>
+                    <div class="triangle-up"></div>
+                    <div class="triangle-left"></div>
+                    <div class="triangle-down"></div>
+                </div>
+            </div>
+            <div class="row2-col3 clearfix">
+                <div class="question" id="c37"></div>
+                <div class="safe" id="c38"></div>
+                <div id="c39"></div>
+                <div id="c40"></div>
+                <div id="c41"></div>
+                <div id="c42"></div>
+                <div id="c43" class="blue"></div>
+                <div id="c44" class="blue"></div>
+                <div id="c45" class="blue"></div>
+                <div id="c46" class="blue"></div>
+                <div id="c47" class="blue"></div>
+                <div id="c48"></div>
+                <div class="safe" id="c49"></div>
+                <div class="safe" id="c50"></div>
+                <div id="c51"></div>
+                <div id="c52"></div>
+                <div id="c53" class="blue"></div>
+                <div id="c54"></div>
+            </div>
+        </div>
+
+  <!-- Third row -->
+        <div class="container-row3 clearfix">
+            <div class="row3-col1 red">
+                <div class="row3-col1-child clearfix white" id="A">
+                    <div  onclick="checkPlayerPress('AX0')"  ><i id="HAX0" style="margin-top: 17%;" class="fas fa-microchip circleRed fa-2x"></i></div>
+                    <div onclick="checkPlayerPress('AX1')" ><i id="HAX1" style="margin-top: 17%;" class="fas fa-hdd circleRed fa-2x"></i></div>
+                    <div onclick="checkPlayerPress('AX2')" ><i id="HAX2" style="margin-top: 17%;" class="fas fa-database circleRed fa-2x"></i></div>
+                    <div onclick="checkPlayerPress('AX3')" ><i id="HAX3" style="margin-top: 17%;" class="fas fa-ethernet circleRed fa-2x"></i></div>
+                </div>
+            </div>
+            <div class="row3-col2 clearfix">
+                <div class="safe" id="c55"></div>
+                <div id="c56" class="red"></div>
+                <div class="question" id="c57"></div>
+                <div class="safe" id="c58"></div>
+                <div id="c59" class="red"></div>
+                <div class="safe" id="c60"></div>
+                <div id="c61"></div>
+                <div id="c62" class="red"></div>
+                <div id="c63"></div>
+                <div id="c64"></div>
+                <div id="c65" class="red"></div>
+                <div id="c66"></div>
+                <div id="c67" class="red"></div>
+                <div id="c68" class="red"></div>
+                <div id="c69" ></div>
+                <div id="c70"></div>
+                <div id="c71"></div>
+                <div id="c72"></div>
+            </div>
+            <div class="row3-col3 blue">
+                <div class="row3-col3-child clearfix white" id="C">
+                    <div  onclick="checkPlayerPress('CX0')" ><i id="HCX0" style="margin-top: 17%;" class="fas fa-microchip circleBlue fa-2x"></i></div>
+                    <div  onclick="checkPlayerPress('CX1')" ><i id="HCX1" style="margin-top: 17%;" class="fas fa-hdd circleBlue fa-2x"></i></div>
+                    <div  onclick="checkPlayerPress('CX2')" ><i id="HCX2" style="margin-top: 17%;" class="fas fa-database circleBlue fa-2x"></i></div>
+                    <div  onclick="checkPlayerPress('CX3')" ><i id="HCX3" style="margin-top: 17%;" class="fas fa-ethernet circleBlue fa-2x"></i></div>
+                </div>
+            </div>
+        </div>
+
+        
+
+
+     </div>
+
+    </div>
+
+
+    <!-- <footer class="footer">
+        <br>
+        <small style="color:floralwhite">
+            &copy;2021 Hazem Kasim<br>
+            <a  href="https://www.linkedin.com/in/hazem-kasim-95063118b/"><i class="fab fa-linkedin ic px-2 fa-lg" style="color: darkblue;"></i></a>
+            <a href="https://github.com/Hazemkak"><i style="color: floralwhite;" class="ic px-2 fab fa-github fa-lg"></i></a>
+            <br>
+            <br>
+        </small>
+    </footer> -->
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>
