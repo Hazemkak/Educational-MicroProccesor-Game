@@ -1,6 +1,6 @@
 <div align="center">
   
-<img src="Sreen\ Shots\Start_Screen.png" alt="Website image">
+<img src="Sreen/ Shots\Start_Screen.png" alt="Website image">
 
 </div>
 
